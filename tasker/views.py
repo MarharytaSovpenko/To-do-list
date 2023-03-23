@@ -53,8 +53,10 @@ class TaskDeleteView(generic.DeleteView):
     success_url = reverse_lazy("tasker:task-list")
 
 
-def toggle_to_done(request: HttpRequest, pk: int) -> HttpResponse:
-    task = get_object_or_404(Task, pk=pk)
-    task.done = not task.done
-    task.save()
-    return HttpResponseRedirect(reverse_lazy("tasker:task-list"))
+class ToggleToDoneView(generic.View):
+    @staticmethod
+    def get(request: HttpRequest, pk: int) -> HttpResponse:
+        task = get_object_or_404(Task, pk=pk)
+        task.done = not task.done
+        task.save()
+        return HttpResponseRedirect(reverse_lazy("tasker:task-list"))

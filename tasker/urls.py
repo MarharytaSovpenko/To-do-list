@@ -9,7 +9,7 @@ from tasker.views import (
     TaskUpdateView,
     TagDeleteView,
     TaskDeleteView,
-    toggle_to_done,
+    ToggleToDoneView,
 )
 
 urlpatterns = [
@@ -55,7 +55,7 @@ urlpatterns = [
     ),
     path(
         "tasks/<int:pk>/toggle-done/",
-        toggle_to_done,
+        ToggleToDoneView.as_view(),
         name="toggle-done",
     ),
 ]
