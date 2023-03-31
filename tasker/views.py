@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -31,7 +32,7 @@ class TagDeleteView(generic.DeleteView):
 class TaskListView(generic.ListView):
     model = Task
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Task]:
         my_queryset = Task.objects.order_by("done", "-time_creation")
         return my_queryset
 
@@ -44,7 +45,7 @@ class TaskCreateView(generic.CreateView):
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
-    fields = "__all__"
+    form_class = TaskForm
     success_url = reverse_lazy("tasker:task-list")
 
 
