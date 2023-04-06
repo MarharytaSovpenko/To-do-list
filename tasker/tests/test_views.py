@@ -105,7 +105,7 @@ class TaskTest(TestCase):
         )
         self.task.refresh_from_db()
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("tasker:task-list"))
+        self.assertEqual(response.url, TASK_LIST_URL)
         self.assertTrue(self.task.done)
 
     def test_toggle_not_done(self):
@@ -116,5 +116,5 @@ class TaskTest(TestCase):
         )
         self.task.refresh_from_db()
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("tasker:task-list"))
+        self.assertEqual(response.url, TASK_LIST_URL)
         self.assertFalse(self.task.done)
